@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguridad Pro - Lista de Aspirantes</title>
+    <link rel="stylesheet" href="estilos_nuevos/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .badge-apto {
+            background-color: #dcfce7;
+            color: #166534;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        .badge-no-apto {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        /* EFECTO VISUAL DE SALIDA MEJORADO */
+        .fila-desvanecer {
+            opacity: 0 !important;
+            transform: translateX(100px) !important; /* Más desplazamiento para que se note */
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+
+        .fila-aprobada {
+            background-color: #dcfce7 !important;
+            transition: background-color 0.3s ease;
+        }
+
+        .fila-rechazada {
+            background-color: #fee2e2 !important;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor-lista">
+        <header>
+            <a href="index.html" class="btn-volver">
+                <i class="fas fa-arrow-left"></i> Volver al Menú
+            </a>
+            <h1><i class="fas fa-users"></i> Base de Datos de Aspirantes</h1>
+            <p class="subtitulo">Candidatos registrados en el sistema</p>
+        </header>
+
+        <div style="margin-bottom: 25px; position: relative;">
+            <i class="fas fa-search" style="position: absolute; left: 15px; top: 15px; color: #64748b;"></i>
+            <input type="text" id="buscador" placeholder="Buscar aspirante por nombre..." 
+                   style="padding: 14px 14px 14px 45px; width: 100%; border-radius: 12px; border: 2px solid #e2e8f0; box-sizing: border-box; font-size: 1rem;">
+        </div>
+
+        <div class="tabla-container">
+            <table id="tablaAspirantes">
+                <thead>
+                    <tr>
+                        <th style="width: 60px; text-align: center;">Foto</th>
+                        <th>Nombre</th>
+                        <th>Estatura</th>
+                        <th>Antecedentes</th>
+                        <th>Resultado</th>
+                        <th>Fecha Registro</th>
+                        <th style="text-align: center;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cuerpoTabla">
+                </tbody>
+            </table>
+            
+            <div id="cargando" class="loader" style="padding: 40px; text-align: center; color: white;">
+                <i class="fas fa-spinner fa-spin"></i> Conectando con la central de datos...
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/main.js"></script>
+    <script src="js/lista.js"></script>
+
+</body>
+</html>

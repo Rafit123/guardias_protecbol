@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguridad Pro - Registro de Aspirante</title>
+    <link rel="stylesheet" href="estilos_nuevos/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body { visibility: hidden; opacity: 0; transition: opacity 0.5s; background-color: #0f172a; }
+        .pregunta-bloque { margin-bottom: 15px; text-align: left; }
+        .pregunta-bloque label { font-size: 0.85rem; display: block; margin-bottom: 5px; color: #475569; }
+        .pregunta-ia { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #cbd5e1; background: white; }
+        
+        /* Estilos para el reporte final */
+        .badge-apto { background-color: #dcfce7; color: #166534; padding: 10px 20px; border-radius: 20px; font-weight: bold; }
+        .badge-no-apto { background-color: #fee2e2; color: #991b1b; padding: 10px 20px; border-radius: 20px; font-weight: bold; }
+    </style>
+</head>
+<body id="cuerpo-pagina">
+
+    <div class="contenedor">
+        <header style="text-align: center; margin-bottom: 20px;">
+            <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: #0f172a;"></i>
+            <h1>SEGURIDAD PRO</h1>
+            <p class="subtitulo">Módulo de Reclutamiento de Personal</p>
+        </header>
+
+        <form id="registroForm">
+            <h2 style="font-size: 1.1rem; color: #1e293b; margin-bottom: 20px; text-align: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                DATOS DEL POSTULANTE
+            </h2>
+
+            <label for="nombre">Nombre Completo:</label>
+            <input type="text" id="nombre" placeholder="Ej. Juan Pérez" required>
+
+            <label for="estatura">Estatura (cm):</label>
+            <input type="number" id="estatura" placeholder="Ej. 175" required>
+
+            <label for="antecedentes">¿Cuenta con antecedentes?</label>
+            <select id="antecedentes">
+                <option value="no">No, registro limpio</option>
+                <option value="si">Sí, cuenta con antecedentes</option>
+            </select>
+
+            <label for="foto">Fotografía del Aspirante:</label>
+            <input type="file" id="foto" accept="image/*" style="padding: 10px; font-size: 0.8rem;">
+
+            <div id="test-ia" style="margin-top: 30px; padding: 20px; border: 1px dashed #fbbf24; border-radius: 12px; background-color: #fffbeb;">
+                <h3 style="color: #0f172a; margin-bottom: 15px; font-size: 1rem; text-align: center;">
+                    <i class="fas fa-brain" style="color: #d97706;"></i> Evaluación Psicotécnica Silenciosa
+                </h3>
+
+                <div class="pregunta-bloque">
+                    <label>1. Ante un sospechoso en el perímetro:</label>
+                    <select id="p1" class="pregunta-ia" required>
+                        <option value="">Seleccione...</option>
+                        <option value="10">Reporto y observo según protocolo</option>
+                        <option value="0">Confronto directamente</option>
+                    </select>
+                </div>
+
+                <div class="pregunta-bloque">
+                    <label>2. ¿Uso de fuerza física?</label>
+                    <select id="p2" class="pregunta-ia" required>
+                        <option value="">Seleccione...</option>
+                        <option value="10">Último recurso (defensa propia)</option>
+                        <option value="0">Para imponer respeto</option>
+                    </select>
+                </div>
+
+                <div class="pregunta-bloque">
+                    <label>3. Orden irregular de un superior:</label>
+                    <select id="p3" class="pregunta-ia" required>
+                        <option value="">Seleccione...</option>
+                        <option value="10">Niego el paso y reporto</option>
+                        <option value="0">Obedezco sin cuestionar</option>
+                    </select>
+                </div>
+
+                <div class="pregunta-bloque">
+                    <label>4. Encuentras un objeto sospechoso:</label>
+                    <select id="p4" class="pregunta-ia" required>
+                        <option value="">Seleccione...</option>
+                        <option value="10">Aislo el área y notifico</option>
+                        <option value="0">Lo muevo para revisar</option>
+                    </select>
+                </div>
+
+                <div class="pregunta-bloque">
+                    <label>5. Un ciudadano herido pide auxilio:</label>
+                    <select id="p5" class="pregunta-ia" required>
+                        <option value="">Seleccione...</option>
+                        <option value="10">Aplico primeros auxilios y pido ayuda</option>
+                        <option value="0">No abandono mi puesto</option>
+                    </select>
+                </div>
+
+                <div class="pregunta-bloque">
+                    <label>6. Actitud ante provocación verbal:</label>
+                    <select id="p6" class="pregunta-ia" required>
+                        <option value="">Seleccione...</option>
+                        <option value="10">Mantengo calma y profesionalismo</option>
+                        <option value="0">Respondo agresivamente</option>
+                    </select>
+                </div>
+
+                <div class="pregunta-bloque">
+                    <label>7. Valor principal de un informe:</label>
+                    <select id="p7" class="pregunta-ia" required>
+                        <option value="">Seleccione...</option>
+                        <option value="10">Veracidad y detalle exacto</option>
+                        <option value="0">Rapidez omitiendo datos</option>
+                    </select>
+                </div>
+
+                <div class="pregunta-bloque">
+                    <label>8. Colega cometiendo falta ética:</label>
+                    <select id="p8" class="pregunta-ia" required>
+                        <option value="">Seleccione...</option>
+                        <option value="10">Reporto a la administración</option>
+                        <option value="0">Guardo silencio</option>
+                    </select>
+                </div>
+
+                <div class="pregunta-bloque">
+                    <label>9. Función principal del guardia:</label>
+                    <select id="p9" class="pregunta-ia" required>
+                        <option value="">Seleccione...</option>
+                        <option value="10">Prevención y vigilancia</option>
+                        <option value="0">Detención violenta</option>
+                    </select>
+                </div>
+
+                <div class="pregunta-bloque">
+                    <label>10. Conocimiento de extintores:</label>
+                    <select id="p10" class="pregunta-ia" required>
+                        <option value="">Seleccione...</option>
+                        <option value="10">Conozco su uso básico</option>
+                        <option value="0">No tengo conocimiento</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" id="btnConfirmar" class="btn-principal" style="margin-top: 25px;">
+                <i class="fas fa-cloud-upload-alt"></i> FINALIZAR Y EVALUAR
+            </button>
+        </form>
+
+        <div id="seccionReporteIA" style="display: none; background: white; padding: 30px; border-radius: 20px; border: 2px solid #e2e8f0; margin-top: 20px;">
+            <h2 style="color: #0f172a; text-align: center;"><i class="fas fa-robot"></i> Análisis de Perfil IA</h2>
+            <div id="resultadoFinalBadge" style="text-align: center; margin: 20px 0;"></div>
+            
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border-left: 5px solid #0f172a;">
+                <h4 style="color: #1e293b; margin-bottom: 10px;">Observaciones del Sistema:</h4>
+                <div id="listaFeedbackIA" style="color: #475569; font-size: 0.95rem; line-height: 1.6;"></div>
+            </div>
+
+            <button onclick="window.location.reload()" class="btn-principal" style="width: 100%; margin-top: 20px; background: #64748b;">
+                REGISTRAR OTRO POSTULANTE
+            </button>
+        </div>
+
+        <div style="text-align: center; margin-top: 25px;">
+            <a href="index.html" id="linkVolver" style="text-decoration: none; color: #64748b; font-size: 0.85rem; font-weight: 600;">
+                <i class="fas fa-chevron-left"></i> Volver al Panel Principal
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/registro.js"></script>
+</body>
+</html>

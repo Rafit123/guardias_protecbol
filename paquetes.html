@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguridad Pro - Paquetes de Servicio</title>
+    <link rel="stylesheet" href="estilos_nuevos/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Estilos específicos para las tarjetas de paquetes */
+        .grid-paquetes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            padding-bottom: 50px;
+        }
+        .tarjeta-paquete {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .tarjeta-paquete:hover {
+            border-color: #ffd700;
+            transform: translateY(-10px);
+        }
+        .precio {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin: 15px 0;
+        }
+        .precio span { font-size: 1rem; color: #64748b; }
+        .lista-detalles {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .lista-detalles li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+            display: flex;
+            align-items: center;
+        }
+        .lista-detalles i { 
+            color: #10b981; 
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+        }
+        .btn-seleccionar {
+            background: #0f172a;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+        .btn-seleccionar:hover { 
+            background: #1e293b; 
+            letter-spacing: 1px;
+        }
+
+        /* Estilos del Modal */
+        .modal-protecbol {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); display: none; align-items: center; 
+            justify-content: center; z-index: 3000;
+        }
+        .modal-contenido {
+            background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 450px;
+            position: relative; animation: slideDown 0.4s ease;
+        }
+        @keyframes slideDown { 
+            from { transform: translateY(-50px); opacity: 0; } 
+            to { transform: translateY(0); opacity: 1; } 
+        }
+        .cerrar-modal { position: absolute; right: 20px; top: 15px; font-size: 24px; cursor: pointer; color: #64748b; }
+
+        /* Estilos del formulario dentro del modal */
+        #formContratoPaquete label { 
+            display: block; margin-top: 15px; font-size: 0.85rem; font-weight: bold; color: #475569; text-align: left; 
+        }
+        #formContratoPaquete input, #formContratoPaquete select { 
+            width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #cbd5e1; border-radius: 10px; box-sizing: border-box; 
+        }
+
+        /* Estilos del Ticket de Orden */
+        .ticket-orden {
+            text-align: center;
+            padding: 10px;
+            background: #fff;
+        }
+        .ticket-recuadro {
+            border: 2px dashed #0f172a;
+            padding: 20px;
+            border-radius: 15px;
+            background: #fcfcfc;
+        }
+        .qr-placeholder {
+            margin: 20px auto;
+            width: 180px;
+            height: 180px;
+            background: #fff;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header h1 { color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        header .subtitulo { color: #ffd700 !important; font-weight: 600; }
+        .btn-volver { color: white; text-decoration: none; display: inline-block; margin-bottom: 15px; font-weight: 500; }
+        .btn-volver:hover { color: #ffd700; }
+    </style>
+</head>
+<body class="dashboard-bg">
+    <div class="contenedor-lista">
+        <header>
+            <a href="index.html" class="btn-volver">
+                <i class="fas fa-arrow-left"></i> Volver al Menú Principal
+            </a>
+            <h1>
+                <i class="fas fa-box-open" style="color: #ffd700;"></i> 
+                Paquetes de Seguridad
+            </h1>
+            <p class="subtitulo">Seleccione el plan que mejor se adapte a su necesidad</p>
+        </header>
+
+        <div id="gridPaquetes" class="grid-paquetes"></div>
+
+        <div id="loader" style="text-align: center; color: white; padding: 100px;">
+            <i class="fas fa-spinner fa-spin fa-3x" style="color: #ffd700;"></i>
+            <p style="margin-top: 15px; font-weight: 500;">Conectando con la central de servicios...</p>
+        </div>
+
+        <div id="modalPaquete" class="modal-protecbol">
+            <div class="modal-contenido">
+                <span class="cerrar-modal" onclick="cerrarModalPaquete()">&times;</span>
+                
+                <div id="seccionFormulario">
+                    <h2 id="tituloPaquete" style="color: #0f172a; margin-bottom: 5px; text-align: center;"></h2>
+                    <p id="descPaquete" style="color: #64748b; font-size: 0.9rem; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; text-align: center;"></p>
+
+                    <form id="formContratoPaquete">
+                        <label><i class="fas fa-user-tie"></i> Nombre del Responsable / Empresa:</label>
+                        <input type="text" id="clienteNombre" placeholder="Ej. Juan Pérez o Tienda X" required>
+
+                        <label><i class="fas fa-map-marker-alt"></i> Ubicación del Evento/Local:</label>
+                        <input type="text" id="clienteUbicacion" placeholder="Dirección exacta" required>
+
+                        <label><i class="fas fa-phone"></i> Teléfono de Contacto:</label>
+                        <input type="tel" id="clienteTelefono" placeholder="78945612" required>
+
+                        <label><i class="fas fa-credit-card"></i> Método de Pago:</label>
+                        <select id="metodoPagoPaquete">
+                            <option value="Transferencia QR">Transferencia QR (Recomendado)</option>
+                            <option value="Efectivo">Pago en Oficina (Efectivo)</option>
+                            <option value="Tarjeta">Tarjeta de Débito/Crédito</option>
+                        </select>
+
+                        <div style="background: #f1f5f9; padding: 15px; border-radius: 12px; text-align: center; margin: 20px 0; border: 1px dashed #cbd5e1;">
+                            <span style="font-size: 0.85rem; color: #475569;">Monto a cancelar:</span><br>
+                            <strong id="montoFinal" style="font-size: 1.5rem; color: #0f172a;"></strong>
+                        </div>
+
+                        <button type="submit" class="btn-principal" style="width: 100%; border-radius: 12px;">
+                            CONFIRMAR CONTRATACIÓN
+                        </button>
+                    </form>
+                </div>
+
+                <div id="seccionTicket" class="ticket-orden" style="display: none;">
+                    <div class="ticket-recuadro">
+                        <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: #0f172a;"></i>
+                        <h2 style="margin: 10px 0; font-size: 1.2rem;">ORDEN DE SERVICIO</h2>
+                        <p id="ticketID" style="font-weight: bold; color: #64748b; font-size: 0.8rem;"></p>
+                        <hr>
+                        <div id="ticketDetalle" style="text-align: left; margin: 15px 0; font-size: 0.85rem; color: #334155;"></div>
+                        
+                        <div id="contenedorQR" class="qr-placeholder">
+                            </div>
+                        
+                        <p style="font-size: 0.75rem; color: #64748b; margin-bottom: 5px;">Escanea este código para pagar</p>
+                        <p style="font-weight: bold; color: #10b981; font-size: 0.9rem;">ESTADO: PENDIENTE DE PAGO</p>
+                    </div>
+                    <button onclick="window.location.reload()" class="btn-principal" style="width: 100%; margin-top: 20px; background: #64748b;">
+                        ENTENDIDO / FINALIZAR
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/paquetes.js"></script>
+</body>
+</html>
