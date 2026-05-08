@@ -1,0 +1,282 @@
+/* =========================================
+   PALETA DE COLORES (Amarillo y Azul)
+   ========================================= */
+:root {
+    --azul-oscuro: #0f172a;
+    --azul-acento: #1e293b;
+    --dorado-seguridad: #fbbf24;
+    --amarillo-fondo: #fef08a; 
+    --azul-lista: #1e3a8a;    
+    --blanco: #ffffff;
+    --exito: #10b981;
+    --error: #ef4444;
+    --borde: #e2e8f0;
+    --sombra: rgba(15, 23, 42, 0.1);
+}
+
+/* =========================================
+   ESTILOS BASE (ACTUALIZADO CON IMAGEN)
+   ========================================= */
+body {
+    margin: 0;
+    font-family: 'Inter', -apple-system, sans-serif;
+    
+    /* Configuración del fondo con imagen y capa oscura */
+    background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), 
+                url('https://ydziovjsqimzyhgpvzwo.supabase.co/storage/v1/object/public/asssets/protecbol_imagen.png'); 
+    
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--azul-oscuro);
+}
+
+/* =========================================
+   CONTENEDOR DE REGISTRO
+   ========================================= */
+.contenedor {
+    background: var(--blanco);
+    width: 95%;
+    max-width: 450px;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px var(--sombra);
+    border: 1px solid var(--borde);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.contenedor::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: var(--azul-oscuro);
+}
+
+h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subtitulo {
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: 0.95rem;
+}
+
+/* Ajustes específicos para el Dashboard sobre fondo oscuro */
+.contenedor-dashboard h1 {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.contenedor-dashboard .subtitulo {
+    color: var(--dorado-seguridad);
+    font-weight: 600;
+}
+
+.contenedor-dashboard header i {
+    color: var(--dorado-seguridad) !important; /* El escudo del index será dorado */
+}
+
+/* =========================================
+   FORMULARIO
+   ========================================= */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--azul-acento);
+    margin-bottom: -15px;
+    margin-left: 4px;
+}
+
+input, select {
+    padding: 14px 16px;
+    border: 2px solid var(--borde);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background-color: #f8fafc;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--azul-oscuro);
+    background-color: var(--blanco);
+    box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.1);
+}
+
+/* =========================================
+   BOTONES
+   ========================================= */
+.btn-principal, button {
+    background-color: var(--azul-oscuro);
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-principal:hover, button:hover {
+    background-color: var(--azul-acento);
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   DASHBOARD / MENU
+   ========================================= */
+.contenedor-dashboard {
+    max-width: 1100px;
+    width: 95%;
+    text-align: center;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.tarjeta-menu {
+    background: var(--blanco);
+    padding: 40px;
+    border-radius: 24px;
+    text-decoration: none;
+    color: var(--azul-oscuro);
+    border: 1px solid var(--borde);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tarjeta-menu:hover {
+    transform: translateY(-10px);
+    border-color: var(--azul-oscuro);
+}
+
+.icono-circulo {
+    width: 70px;
+    height: 70px;
+    background: #f1f5f9;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    transition: 0.3s;
+}
+
+.tarjeta-menu:hover .icono-circulo {
+    background: var(--azul-oscuro);
+    transform: rotate(10deg);
+}
+
+.tarjeta-menu:hover .icono-circulo i {
+    color: white;
+}
+
+/* =========================================
+   LISTA DE REGISTROS (Azul)
+   ========================================= */
+.contenedor-lista {
+    max-width: 1200px;
+    width: 95%;
+    margin: 40px auto;
+}
+
+.contenedor-lista h1 {
+    color: white;
+}
+
+.tabla-container {
+    background-color: var(--azul-lista);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+th {
+    background-color: #f8fafc;
+    padding: 16px;
+    text-align: left;
+    color: #64748b;
+    border-bottom: 2px solid var(--borde);
+}
+
+td {
+    padding: 18px 16px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+/* Extras */
+.badge-apto { background: #ecfdf5; color: #065f46; padding: 6px 14px; border-radius: 20px; font-weight: 700; }
+.badge-no-apto { background: #fef2f2; color: #991b1b; padding: 6px 14px; border-radius: 20px; font-weight: 700; }
+
+.btn-volver {
+    text-decoration: none;
+    color: var(--dorado-seguridad);
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+footer p {
+    margin-top: 40px;
+    color: rgba(255, 255, 255, 0.6);
+}
+.modal-protecbol {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000;
+}
+.modal-contenido {
+    background: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 450px;
+    position: relative; box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+.cerrar-modal { position: absolute; right: 15px; top: 10px; font-size: 25px; cursor: pointer; }
+.cuadro-precio {
+    background: #f1f5f9; padding: 15px; border-radius: 10px; margin: 15px 0;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.cuadro-precio strong { color: #0f172a; font-size: 1.2rem; }
+#formContrato label { display: block; margin-top: 10px; font-size: 0.85rem; font-weight: bold; color: #475569; }
+#formContrato input, #formContrato select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #cbd5e1; border-radius: 5px; }
